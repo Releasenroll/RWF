@@ -1,230 +1,703 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Rock With Force</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Ubuntu", Ubuntu}
-.w3-row-padding img {margin-bottom: 12px}
-/* Set the width of the sidebar to 120px */
-.w3-sidebar {width: 120px;background: #222;}
-/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-#main {margin-left: 120px}
-/* Remove margins from "page content" on small screens */
-@media only screen and (max-width: 600px) {#main {margin-left: 0}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock With Force: Global SME Billboard</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/google-gemini/gemini-image-sample/main/RWF_Logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rwf-neon-blue: #00eaff;
+            --rwf-neon-purple: #ae00ff;
+            --rwf-neon-orange: #ff8c00;
+            --rwf-dark-bg: #1a0033; /* Darker purple/blue for background */
+            --rwf-medium-bg: #2d0055;
+            --rwf-light-bg: #400077;
+            --text-light: #f0f0f0;
+            --text-grey: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--rwf-dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle grid background for the body */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        /* Neon Glow Effect for elements */
+        .neon-glow {
+            text-shadow: 
+                0 0 5px var(--rwf-neon-blue),
+                0 0 10px var(--rwf-neon-purple),
+                0 0 15px var(--rwf-neon-orange);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent */
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px; /* Adjust RWF logo size */
+            filter: drop-shadow(0 0 8px var(--rwf-neon-blue)) drop-shadow(0 0 8px var(--rwf-neon-purple));
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1em;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--rwf-neon-blue), var(--rwf-neon-purple), var(--rwf-neon-orange));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--rwf-neon-blue);
+            text-shadow: 0 0 5px var(--rwf-neon-blue);
+        }
+
+        .cta-button {
+            background: linear-gradient(to right, var(--rwf-neon-blue), var(--rwf-neon-purple));
+            color: var(--text-light);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 226, 255, 0.5);
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(to right, var(--rwf-neon-purple), var(--rwf-neon-orange));
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            background: radial-gradient(circle at center, rgba(var(--rwf-neon-purple, 1), 0.2) 0%, transparent 70%);
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: var(--text-light);
+            text-shadow: 0 0 15px var(--rwf-neon-blue), 0 0 20px var(--rwf-neon-purple);
+            animation: pulse-neon 2s infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            color: var(--text-grey);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes pulse-neon {
+            0% { text-shadow: 0 0 10px var(--rwf-neon-blue), 0 0 15px var(--rwf-neon-purple); }
+            100% { text-shadow: 0 0 15px var(--rwf-neon-blue), 0 0 25px var(--rwf-neon-purple), 0 0 35px var(--rwf-neon-orange); }
+        }
+
+        /* Billboard Sections */
+        .billboard-section {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--rwf-medium-bg);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .billboard-section:nth-child(even) {
+            background-color: var(--rwf-light-bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8em;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 20px;
+        }
+
+        .section-header::before,
+        .section-header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 100px; /* Length of the line */
+            height: 2px;
+            background: linear-gradient(to right, var(--rwf-neon-blue), var(--rwf-neon-purple), var(--rwf-neon-orange));
+            box-shadow: 0 0 8px var(--rwf-neon-blue), 0 0 8px var(--rwf-neon-purple);
+        }
+
+        .section-header::before {
+            left: -120px; /* Position to the left */
+        }
+
+        .section-header::after {
+            right: -120px; /* Position to the right */
+        }
+
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .logo-item {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(var(--rwf-neon-blue, 1), 0.2);
+            box-shadow: 0 0 10px rgba(0, 226, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(var(--rwf-neon-blue, 1), 0.1), rgba(var(--rwf-neon-purple, 1), 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-item:hover::before {
+            opacity: 1;
+        }
+
+        .logo-item:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 226, 255, 0.3), 0 0 20px rgba(var(--rwf-neon-purple, 1), 0.5);
+            border-color: var(--rwf-neon-blue);
+        }
+
+        .logo-item img {
+            max-width: 100%;
+            height: auto;
+            max-height: 120px;
+            object-fit: contain;
+            filter: grayscale(20%) brightness(120%);
+            transition: all 0.3s ease;
+        }
+
+        .logo-item:hover img {
+            filter: grayscale(0%) brightness(100%) drop-shadow(0 0 10px rgba(var(--rwf-neon-blue, 1), 0.5));
+        }
+
+        .logo-item h3 {
+            margin-top: 15px;
+            font-size: 1.3em;
+            color: var(--text-light);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px rgba(var(--rwf-neon-blue, 1), 0.3);
+        }
+
+        /* Specific tier styling */
+        .diamond .logo-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+        .diamond .logo-item {
+            padding: 30px;
+            border: 2px solid var(--rwf-neon-blue);
+            box-shadow: 0 0 15px rgba(0, 226, 255, 0.5);
+        }
+        .diamond .logo-item:hover {
+            box-shadow: 0 10px 30px rgba(0, 226, 255, 0.5), 0 0 30px rgba(var(--rwf-neon-purple, 1), 0.8);
+            border-color: var(--rwf-neon-purple);
+        }
+        .diamond .logo-item img {
+            max-height: 150px;
+        }
+
+        .gold .logo-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 35px;
+        }
+        .gold .logo-item {
+            border: 1px solid var(--rwf-neon-purple);
+            box-shadow: 0 0 8px rgba(var(--rwf-neon-purple, 1), 0.3);
+        }
+        .gold .logo-item:hover {
+            box-shadow: 0 8px 25px rgba(var(--rwf-neon-purple, 1), 0.5), 0 0 20px rgba(var(--rwf-neon-orange, 1), 0.5);
+            border-color: var(--rwf-neon-orange);
+        }
+
+        .silver .logo-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+        }
+        .silver .logo-item {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .silver .logo-item:hover {
+            border-color: var(--rwf-neon-blue);
+            box-shadow: 0 5px 15px rgba(var(--rwf-neon-blue, 1), 0.3);
+        }
+
+        .bronze .logo-grid {
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
+        }
+        .bronze .logo-item {
+             border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .bronze .logo-item:hover {
+            border-color: var(--rwf-neon-purple);
+            box-shadow: 0 3px 10px rgba(var(--rwf-neon-purple, 1), 0.2);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--text-grey);
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+        }
+
+        footer .footer-links {
+            margin-bottom: 20px;
+        }
+
+        footer .footer-links a {
+            color: var(--text-grey);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--rwf-neon-blue);
+            text-shadow: 0 0 5px var(--rwf-neon-blue);
+        }
+
+        .social-icons a {
+            color: var(--text-grey);
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--rwf-neon-orange);
+            text-shadow: 0 0 8px var(--rwf-neon-orange);
+        }
+
+        /* Scroll to Top button */
+        #scrollToTop {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background: linear-gradient(to right, var(--rwf-neon-purple), var(--rwf-neon-blue));
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            box-shadow: 0 0 15px rgba(var(--rwf-neon-blue, 1), 0.7);
+            transition: all 0.3s ease;
+        }
+
+        #scrollToTop:hover {
+            background: linear-gradient(to right, var(--rwf-neon-orange), var(--rwf-neon-purple));
+            box-shadow: 0 0 20px rgba(var(--rwf-neon-orange, 1), 0.9);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1.1em;
+            }
+            nav ul {
+                display: none; /* Hide nav on small screens, could add a hamburger menu */
+            }
+            .header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .logo {
+                margin-bottom: 15px;
+            }
+            .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+            .logo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 20px;
+            }
+            .diamond .logo-grid, .gold .logo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+            .section-header {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+            .section-header::before,
+            .section-header::after {
+                width: 50px;
+                left: -60px;
+                right: -60px;
+            }
+        }
+        @media (max-width: 480px) {
+            .logo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            .diamond .logo-grid, .gold .logo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+            .logo-item {
+                padding: 15px;
+            }
+            .logo-item img {
+                max-height: 90px;
+            }
+            .logo-item h3 {
+                font-size: 1.1em;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .section-header {
+                font-size: 1.8em;
+            }
+        }
+    </style>
 </head>
-<body class="w3-black">
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#home">
+                    <img src="https://raw.githubusercontent.com/google-gemini/gemini-image-sample/main/RWF_Logo.png" alt="Rock With Force Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#diamond">Diamond</a></li>
+                    <li><a href="#gold">Gold</a></li>
+                    <li><a href="#silver">Silver</a></li>
+                    <li><a href="#bronze">Bronze</a></li>
+                    <li><a href="#advertise" class="cta-button">Advertise With Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <!-- Avatar image in top left corner -->
-  <img src="/RWF2.jpg" style="width:100%">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
-    <i class="fa fa-home w3-xxlarge"></i>
-    <p>HOME</p>
-  </a>
-  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-user w3-xxlarge"></i>
-    <p>ABOUT</p>
-  </a>
-  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-xxlarge"></i>
-    <p>PHOTOS</p>
-  </a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-envelope w3-xxlarge"></i>
-    <p>CONTACT</p>
-  </a>
-</nav>
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1 class="neon-glow">Amplify Your Brand. Connect Globally.</h1>
+                <p>Discover innovative small and medium enterprises from around the world. Click on a logo to explore their story and products.</p>
+                <a href="#advertise" class="cta-button">Start Advertising Today</a>
+            </div>
+        </section>
 
-<!-- Navbar on small screens (Hidden on medium and large screens) -->
-<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
-    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
-  </div>
-</div>
+        <section id="diamond" class="billboard-section diamond">
+            <div class="container">
+                <h2 class="section-header neon-glow">Diamond Partners</h2>
+                <p style="text-align: center; color: var(--text-grey); margin-bottom: 40px;">Our elite partners, showcasing their brands with unparalleled prominence.</p>
+                <div class="logo-grid">
+                    <!-- Diamond Partner Logos -->
+                    <a href="https://www.example.com/diamond1" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/00eaff/000000?text=DIAMOND+BRAND+1" alt="Diamond Brand 1">
+                        <h3>Diamond Brand 1</h3>
+                    </a>
+                    <a href="https://www.example.com/diamond2" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/ae00ff/FFFFFF?text=DIAMOND+BRAND+2" alt="Diamond Brand 2">
+                        <h3>Diamond Brand 2</h3>
+                    </a>
+                    <a href="https://www.example.com/diamond3" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/ff8c00/000000?text=DIAMOND+BRAND+3" alt="Diamond Brand 3">
+                        <h3>Diamond Brand 3</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-<!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-    <h1 class="w3-jumbo">Rock With Force.</h1>
-    <p>THE DESIGN-X BRAND</p>
-     <video width="320" height="240" controls autoplay muted loop>
-  <source src="RWF.mp4" type="video/mp4">
-   </video> 
-  </header>
+        <section id="gold" class="billboard-section gold">
+            <div class="container">
+                <h2 class="section-header neon-glow">Gold Partners</h2>
+                <p style="text-align: center; color: var(--text-grey); margin-bottom: 40px;">Premium brands reaching a wider audience through strategic placement.</p>
+                <div class="logo-grid">
+                    <!-- Gold Partner Logos -->
+                    <a href="https://www.freebirdclothing.store/shop" target="_blank" class="logo-item">
+                        <img src="https://raw.githubusercontent.com/google-gemini/gemini-image-sample/main/Freebird_Clothing_Logo.png" alt="Freebird Clothing">
+                        <h3>Freebird Clothing</h3>
+                    </a>
+                    <a href="https://www.example.com/gold2" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/ff8c00/FFFFFF?text=GOLD+GEAR+CO" alt="Gold Gear Co.">
+                        <h3>Gold Gear Co.</h3>
+                    </a>
+                    <a href="https://www.example.com/gold3" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/00eaff/000000?text=TECH+NEXUS" alt="Tech Nexus">
+                        <h3>Tech Nexus</h3>
+                    </a>
+                    <a href="https://www.example.com/gold4" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/ae00ff/FFFFFF?text=MOTO+DREAM" alt="Moto Dream">
+                        <h3>Moto Dream</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-  <!-- About Section -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-    <h2 class="w3-text-light-grey">DESIGN-X TEAM</h2>
-    <hr style="width:200px" class="w3-opacity">
-    <p>We have created a fictional brand website. We will add our work here to build a gallery. Our key areas of expertise are in logo design, vector graphics and brochures.
-    <h3 class="w3-padding-16 w3-text-light-grey">Our Skills</h3>
-    <p class="w3-wide">Poster Design</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:95%"></div>
-    </div>
-    <p class="w3-wide">Logos</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:85%"></div>
-    </div>
-    <p class="w3-wide">Photoshop</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:80%"></div>
-    </div><br>
-    
-    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">11+</span><br>
-        Partners
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">55+</span><br>
-        Projects Done
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">89+</span><br>
-        Happy Clients
-      </div>
-      <div class="w3-quarter w3-section">
-        <span class="w3-xlarge">150+</span><br>
-        Meetings
-      </div>
-    </div>
+        <section id="silver" class="billboard-section silver">
+            <div class="container">
+                <h2 class="section-header neon-glow">Silver Partners</h2>
+                <p style="text-align: center; color: var(--text-grey); margin-bottom: 40px;">Growing businesses gaining visibility with our targeted platform.</p>
+                <div class="logo-grid">
+                    <!-- Silver Partner Logos -->
+                    <a href="https://www.example.com/silver1" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/cccccc/333333?text=SILVER+APPAREL" alt="Silver Apparel">
+                        <h3>Silver Apparel</h3>
+                    </a>
+                    <a href="https://www.example.com/silver2" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/aaaaaa/444444?text=SOUND+WAVES" alt="Sound Waves">
+                        <h3>Sound Waves</h3>
+                    </a>
+                    <a href="https://www.example.com/silver3" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/bbbbbb/555555?text=MOBILE+HUB" alt="Mobile Hub">
+                        <h3>Mobile Hub</h3>
+                    </a>
+                    <a href="https://www.example.com/silver4" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/dddddd/666666?text=RIDE+FREE" alt="Ride Free">
+                        <h3>Ride Free</h3>
+                    </a>
+                    <a href="https://www.example.com/silver5" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/eeeeee/777777?text=HOME+GADGETS" alt="Home Gadgets">
+                        <h3>Home Gadgets</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <button class="w3-button w3-light-grey w3-padding-large w3-section">
-      <a href="https://info.flagcounter.com/ZSid"><img src="https://s01.flagcounter.com/count2/ZSid/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-    </button>
-    
-    <!-- Grid for pricing tables -->
-    <h3 class="w3-padding-16 w3-text-light-grey">My Price</h3>
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-half w3-margin-bottom">
-        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-          <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
-          <li class="w3-padding-16">Poster Design</li>
-          <li class="w3-padding-16">Iconography</li>
-          <li class="w3-padding-16">Flyers</li>
-          <li class="w3-padding-16">Brochures</li>
-          <li class="w3-padding-16">
-            <h2>₹ 1500</h2>
-            <span class="w3-opacity">per hour</span>
-          </li>
-          <li class="w3-light-grey w3-padding-24">
-            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-          </li>
-        </ul>
-      </div>
+        <section id="bronze" class="billboard-section bronze">
+            <div class="container">
+                <h2 class="section-header neon-glow">Bronze Partners</h2>
+                <p style="text-align: center; color: var(--text-grey); margin-bottom: 40px;">New and emerging brands starting their journey to global recognition.</p>
+                <div class="logo-grid">
+                    <!-- Bronze Partner Logos -->
+                    <a href="https://www.example.com/bronze1" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/999999/FFFFFF?text=BRONZE+RETAIL" alt="Bronze Retail">
+                        <h3>Bronze Retail</h3>
+                    </a>
+                    <a href="https://www.example.com/bronze2" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/777777/000000?text=MUSIC+MAKERS" alt="Music Makers">
+                        <h3>Music Makers</h3>
+                    </a>
+                    <a href="https://www.example.com/bronze3" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/888888/FFFFFF?text=ACCELERATE+BIKE" alt="Accelerate Bike">
+                        <h3>Accelerate Bike</h3>
+                    </a>
+                    <a href="https://www.example.com/bronze4" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/666666/000000?text=FASHION+FIND" alt="Fashion Find">
+                        <h3>Fashion Find</h3>
+                    </a>
+                    <a href="https://www.example.com/bronze5" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/555555/FFFFFF?text=AUDIO+GEAR" alt="Audio Gear">
+                        <h3>Audio Gear</h3>
+                    </a>
+                    <a href="https://www.example.com/bronze6" target="_blank" class="logo-item">
+                        <img src="https://via.placeholder.com/150x150/444444/000000?text=TREND+TECH" alt="Trend Tech">
+                        <h3>Trend Tech</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-      <div class="w3-half">
-        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
-          <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro</li>
-          <li class="w3-padding-16">Poster Design</li>
-          <li class="w3-padding-16">Iconography</li>
-          <li class="w3-padding-16">Flyers</li>
-          <li class="w3-padding-16">Brochures</li>
-          <li class="w3-padding-16">
-            <h2>₹ 15000</h2>
-            <span class="w3-opacity">per month</span>
-          </li>
-          <li class="w3-light-grey w3-padding-24">
-            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-          </li>
-        </ul>
-      </div>
-    <!-- End Grid/Pricing tables -->
-    </div>
-    
-    <!-- Testimonials -->
-    <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>  
-    <img src="/w3images/bandmember.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">Avi.</span> CEO at Wivo.</p>
-    <p>John Doe saved us from a web disaster.</p><br>
-    
-    <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">P Menon.</span> CEO at FreeBird.</p>
-    <p>No one is better than John Doe.</p>
-  <!-- End About Section -->
-  </div>
-  
-  <!-- Portfolio Section -->
-  <div class="w3-padding-64 w3-content" id="photos">
-    <h2 class="w3-text-light-grey">My Photos</h2>
-    <hr style="width:200px" class="w3-opacity">
+        <section id="advertise" class="billboard-section" style="background-color: var(--rwf-dark-bg); text-align: center;">
+            <div class="container">
+                <h2 class="section-header neon-glow" style="margin-bottom: 20px;">Want to Amplify Your Brand?</h2>
+                <p style="font-size: 1.3em; margin-bottom: 30px; color: var(--text-grey);">Join the Rock With Force platform and reach a global audience.</p>
+                <a href="#" class="cta-button" style="padding: 15px 30px; font-size: 1.2em;">Explore Our Advertising Plans</a>
+            </div>
+        </section>
+    </main>
 
-    <!-- Grid for photos -->
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-half">
-        <img src="/w3images/wedding.jpg" style="width:100%">
-        <img src="/w3images/rocks.jpg" style="width:100%">
-        <img src="/w3images/sailboat.jpg" style="width:100%">
-      </div>
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="social-icons">
+                <!-- Replace with actual social media icons if you have them -->
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2023 Rock With Force. All rights reserved.</p>
+        </div>
+    </footer>
 
-      <div class="w3-half">
-        <img src="/w3images/underwater.jpg" style="width:100%">
-        <img src="/w3images/chef.jpg" style="width:100%">
-        <img src="/w3images/wedding.jpg" style="width:100%">
-        <img src="/w3images/p6.jpg" style="width:100%">
-      </div>
-    <!-- End photo grid -->
-    </div>
-  <!-- End Portfolio Section -->
-  </div>
+    <button onclick="scrollToTopFunction()" id="scrollToTop" title="Go to top">&#9650;</button>
 
-  <!-- Contact Section -->
-  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
-    <h2 class="w3-text-light-grey">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
 
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Chicago, US</p>
-      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: mail@mail.com</p>
-    </div><br>
-    <p>Let's get in touch. Send me a message:</p>
+                // Remove 'active' class from all nav items
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                // Add 'active' class to the clicked item
+                this.classList.add('active');
+            });
+        });
 
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
-      <p>
-        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
-          <i class="fa fa-paper-plane"></i> SEND MESSAGE
-        </button>
-      </p>
-    </form>
-  <!-- End Contact Section -->
-  </div>
-  
-    <!-- Footer -->
-  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-  <!-- End footer -->
-  </footer>
+        // Highlight active nav item on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
-<!-- END PAGE CONTENT -->
-</div>
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) { // Adjust offset for better timing
+                    current = section.getAttribute('id');
+                }
+            });
 
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Show/hide scroll to top button
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                document.getElementById("scrollToTop").style.display = "block";
+            } else {
+                document.getElementById("scrollToTop").style.display = "none";
+            }
+        });
+
+        // Scroll to top functionality
+        function scrollToTopFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+    <!-- Font Awesome for social icons (optional, but good for common icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>
 </html>
-
-
-
-
-
