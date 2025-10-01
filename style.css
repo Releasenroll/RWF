@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'YourCustomFontName'; /* Choose a descriptive name for your font */
+  src: url('path/to/your/font.woff2') format('woff2'), /* Path to your font file (WOFF2 format recommended) */
+       url('path/to/your/font.woff') format('woff'),   /* Path to your font file (WOFF format) */
+       url('path/to/your/font.ttf') format('truetype'); /* Path to your font file (TrueType format) */
+  font-weight: normal; /* Optional: Define the font's weight (e.g., normal, bold, 400, 700) */
+  font-style: normal;  /* Optional: Define the font's style (e.g., normal, italic) */
+  font-display: swap;  /* Optional: Controls how the font is loaded and displayed (e.g., swap, block, fallback, optional) */
+}
+
+/* Apply the custom font to HTML elements */
+body {
+  font-family: 'RovelinkRegular', sans-serif; /* Use your chosen font name, with a fallback generic font */
+}
+
+h1 {
+  font-family: 'NCLMonsterBeast Demo', serif;
+}
+
+Explanation:
+
+    @font-face rule:
+        font-family: This descriptor assigns a name to your custom font, which you will use later to apply it to elements.
+        src: This descriptor specifies the location of your font files. It's recommended to provide multiple formats (WOFF2, WOFF, TTF) for broader browser compatibility. The format() function indicates the type of font file.
+        font-weight and font-style: These optional descriptors define the weight and style of the font, allowing you to include different variations (e.g., bold, italic) if you have separate font files for them.
+        font-display: This optional descriptor controls the font loading behavior, impacting user experience during font loading. swap is a common value that displays a fallback font until the custom font is loaded. 
+    Applying the font:
+        Once defined with @font-face, you can apply your custom font to any HTML element using the font-family CSS property, just like any other font.
+        Always include a generic font family (e.g., sans-serif, serif, monospace) as a fallback in case the custom font fails to load. 
+
+Show more
