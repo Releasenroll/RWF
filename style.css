@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Rovelink'; /* Choose a descriptive name for your font */
-  src: url('Rovelink.otf') format('woff2'), /* Path to your font file (WOFF2 format recommended) */
-       url('/NCLMonsterBeast-Demo.otf') format('woff'),   /* Path to your font file (WOFF format) */
+  src: url('Rovelink.otf') format('otp'), /* Path to your font file (WOFF2 format recommended) */
+       url('/NCLMonsterBeast-Demo.otf') format('otf'),   /* Path to your font file (WOFF format) */
        url('path/to/your/font.ttf') format('truetype'); /* Path to your font file (TrueType format) */
   font-weight: normal; /* Optional: Define the font's weight (e.g., normal, bold, 400, 700) */
   font-style: normal;  /* Optional: Define the font's style (e.g., normal, italic) */
@@ -29,4 +29,5 @@ Explanation:
         Always include a generic font family (e.g., sans-serif, serif, monospace) as a fallback in case the custom font fails to load. 
 
 Show more
+
 
